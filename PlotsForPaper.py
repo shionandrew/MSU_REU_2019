@@ -49,6 +49,12 @@ def plotLightCurve():
     aphase = []
     for i in range(len(abjd)):
         aphase.append(foldAt(abjd[i],P,T0=t0,getEpoch=False))
+    aphase.reverse()
+    aphase2 = aphase + aphase
+    magerr.reverse()
+    magerr2 = magerr + magerr
+    mag.reverse()
+    mag2 = mag+mag
 
     plt.rc('text', usetex=True)
     plt.rc('font', family='serif')
@@ -56,7 +62,8 @@ def plotLightCurve():
     plt.xlabel(r'\textbf{Phase}')
     plt.gca().invert_xaxis()
     plt.ylim(17, 18)
-    plt.errorbar(aphase, mag, yerr=magerr, fmt='none', ecolor = 'black')
+    plt.scatter(aphase2, mag2, color = 'red', s = .5)
+    plt.errorbar(aphase2, mag2, yerr=magerr2, ecolor = 'black', lw = .6, capsize = 1, fmt = 'none')
     plt.show()
 
 def foldAt(time, period, T0=0.0, getEpoch=False):
